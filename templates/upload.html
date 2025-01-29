@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+    <!-- add random favicon -->
+    <link rel="icon" href="https://picsum.photos/200/300">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #e0e0e0;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: #222;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 30px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        input[type="file"] {
+            padding: 12px;
+            border: 2px dashed #bbb;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: border-color 0.3s, background-color 0.3s;
+            background-color: #f9f9f9;
+        }
+        input[type="file"]:hover {
+            border-color: #666;
+            background-color: #f0f0f0;
+        }
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            background-color: #0066cc;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+        button:hover:not(:disabled) {
+            background-color: #004d99;
+        }
+    </style>
+    <script>
+        function disableUploadButton() {
+            const button = document.getElementById('uploadButton');
+            button.disabled = true;
+            button.innerText = 'Uploading...';
+        }
+
+        function enableUploadButton() {
+            const button = document.getElementById('uploadButton');
+            button.disabled = false;
+            button.innerText = 'Upload';
+        }
+
+        function handleFormSubmit(event) {
+            disableUploadButton();
+            return true;
+        }
+
+        window.onload = function() {
+            document.getElementById('uploadForm').onsubmit = handleFormSubmit;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>.EXE Viewer</h1>
+        <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+            <label for="fileInput" style="display:none;">Upload File</label>
+            <input type="file" id="fileInput" name="file" required title="Choose a .exe file to upload">
+            <button type="submit" id="uploadButton">Upload</button>
+        </form>
+    </div>
+</body>
+</html>
